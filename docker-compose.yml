@@ -16,9 +16,17 @@ services:
       # - ROS_MASTER_URI=http://master:11311 
     volumes:
       - ./:/ws/src/ouster_ros_driver_pkg       # <-- YOUR TODO: change to name of your repository
-    privileged: true
-    entrypoint: chmod +x /ws/src/ouster_ros_driver_pkg/docker-entrypoint.sh && /ws/src/ouster_ros_driver_pkg/docker-entrypoint.sh  # <-- YOUR TODO: change to name of your repository
+    ports:
+      - "1234:1234"
+    entrypoint: /ws/src/ouster_ros_driver_pkg/docker-entrypoint.sh  # <-- YOUR TODO: change to name of your repository
     command: sh -c "while true; do sleep 1; done"    
-# networks:
-#   ros_network:
-#     driver: bridge
+    networks:
+      ros_network:
+        ipv4_address: 169.254.0.2
+networks:
+  ros_network:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 169.254.0.0/16
