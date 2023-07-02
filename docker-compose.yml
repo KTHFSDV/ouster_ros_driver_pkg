@@ -1,0 +1,24 @@
+version: '3.8'
+
+services:
+  ouster_ros_driver_pkg:           # <-- YOUR TODO: change to name of your repository
+    # depends_on: 
+      # - master          
+      # - <package>          # <-- YOUR TODO: change dependencies to other packages
+    build:
+      context: .  
+      dockerfile: Dockerfile
+    image: ouster_ros_driver_pkg:latest        # <-- YOUR TODO: change to name of your repository
+    restart: unless-stopped
+    environment:
+      - PACKAGE_NAME=ouster_ros_driver_pkg     # <-- YOUR TODO: change to name of your repository
+      - OUSTER_HOSTNAME=${LIDAR_IP_ADDRESS}
+      # - ROS_MASTER_URI=http://master:11311 
+    volumes:
+      - ./:/ws/src/ouster_ros_driver_pkg       # <-- YOUR TODO: change to name of your repository
+    privileged: true
+    entrypoint: chmod +x /ws/src/ouster_ros_driver_pkg/docker-entrypoint.sh && /ws/src/ouster_ros_driver_pkg/docker-entrypoint.sh  # <-- YOUR TODO: change to name of your repository
+    command: sh -c "while true; do sleep 1; done"    
+# networks:
+#   ros_network:
+#     driver: bridge
