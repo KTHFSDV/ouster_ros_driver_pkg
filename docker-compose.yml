@@ -11,23 +11,14 @@ services:
     image: ouster_ros_driver_pkg:latest        # <-- YOUR TODO: change to name of your repository
     restart: unless-stopped
     network_mode: host
+    cap_add:
+      - NET_ADMIN
     environment:
       - PACKAGE_NAME=ouster_ros_driver_pkg     # <-- YOUR TODO: change to name of your repository
       - OUSTER_HOSTNAME=${LIDAR_IP_ADDRESS}
+      - XAVIER_IP=${XAVIER_IP}
       # - ROS_MASTER_URI=http://master:11311 
     volumes:
       - ./:/ws/src/ouster_ros_driver_pkg       # <-- YOUR TODO: change to name of your repository
-    ports:
-      - "1234:1234"
     entrypoint: /ws/src/ouster_ros_driver_pkg/docker-entrypoint.sh  # <-- YOUR TODO: change to name of your repository
-    command: bash -c "source devel/setup.bash && roslaunch ouster_ros ouster.launch"    
-    # networks:
-    #   ros_network:
-    #     ipv4_address: 169.254.0.2
-# networks:
-#   ros_network:
-#     driver: bridge
-#     ipam:
-#       driver: default
-#       config:
-#         - subnet: 169.254.0.0/16
+    command: bash -c "source devel/setup.bash" && roslaunch ouster_ros ouster.launch"    

@@ -16,6 +16,9 @@ ENV DEBIAN_FRONTEND=noninteractive
 # Package apt dependencies
 RUN apt-get update && apt-get upgrade -y
 RUN apt-get install -y \
+        avahi-daemon \
+        iproute2 \
+        iputils-ping \
         nano \
         git \
         python3-catkin-tools \
