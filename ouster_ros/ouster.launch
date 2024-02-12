@@ -1,6 +1,6 @@
 <launch>
 
-  <arg name="sensor_hostname" default="$(env OUSTER_HOSTNAME)" doc="hostname or IP in dotted decimal form of the sensor"/>
+  <arg name="sensor_hostname" default="$(env LIDAR_IP_ADDRESS)" doc="hostname or IP in dotted decimal form of the sensor"/>
   <arg name="udp_dest" default="$(env XAVIER_IP)" doc="hostname or IP where the sensor will send data packets"/>
   <arg name="lidar_port" default="0" doc="port to which the sensor should send lidar data"/>
   <arg name="imu_port" default="0" doc="port to which the sensor should send imu data"/>
